@@ -1,0 +1,138 @@
+/* Products.css */
+
+.container {
+    max-width: 1200px; /* Limit the width of the container */
+    margin: 0 auto; /* Center the container */
+    padding: 20px; /* Add some padding */
+}
+
+h2 {
+    text-align: center; /* Center the heading */
+    margin-bottom: 20px; /* Add some space below the heading */
+}
+
+.search-bar {
+    display: flex; /* Use flexbox for alignment */
+    justify-content: center; /* Center the search bar */
+    margin-bottom: 20px; /* Add some space below the search bar */
+}
+
+.search-bar input {
+    padding: 10px; /* Add padding to the input */
+    border: 1px solid #ccc; /* Add border to the input */
+    border-radius: 5px; /* Round the corners */
+    width: 300px; /* Set a fixed width for the input */
+}
+
+.search-bar button {
+    padding: 10px 15px; /* Add padding to the button */
+    margin-left: 10px; /* Add space between the input and button */
+    border: none; /* Remove default border */
+    background-color: #007bff; /* Primary color */
+    color: white; /* White text color */
+    border-radius: 5px; /* Round the corners */
+    cursor: pointer; /* Change cursor on hover */
+}
+
+.search-bar button:hover {
+    background-color: #0056b3; /* Darker shade on hover */
+}
+
+.product-list {
+    display: flex; /* Use flexbox for product alignment */
+    flex-wrap: wrap; /* Allow wrapping to the next line */
+    justify-content: center; /* Center the products */
+}
+
+.product-card {
+    border: 1px solid #ccc; /* Add border to the card */
+    border-radius: 5px; /* Round the corners */
+    margin: 10px; /* Add some space between cards */
+    padding: 15px; /* Add padding inside the card */
+    width: 250px; /* Set a fixed width for product cards */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    transition: transform 0.2s; /* Add transition for hover effect */
+}
+
+.product-card:hover {
+    transform: translateY(-5px); /* Lift the card on hover */
+}
+
+.product-card img {
+    max-width: 100%; /* Ensure images are responsive */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 5px; /* Round the corners of the image */
+}
+
+.price {
+    font-weight: bold; /* Bold the price */
+    color: #333; /* Darker color for the price */
+}
+
+.message {
+    text-align: center; /* Center the message */
+    color: red; /* Red color for error messages */
+}
+
+/* Products.css */
+
+.quantity-input {
+    width: 60px;
+    margin-right: 10px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.add-to-cart-button {
+    padding: 10px 15px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-to-cart-button:hover {
+    background-color: #218838;
+}
+
+.cart-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.cart-container h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.cart-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.cart-container li {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cart-container button {
+    padding: 5px 10px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.cart-container button:hover {
+    background-color: #c82333;
+}
+
+

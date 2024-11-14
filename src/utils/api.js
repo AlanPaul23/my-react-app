@@ -38,6 +38,28 @@ export const api = {
             body: JSON.stringify(data),
         }),
 
+      
+        requestOtp: (phoneNumber) =>
+            fetch(`${BASE_URL}/admin_console/otp-login/`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ phone_number: phoneNumber }), 
+            }).then((res) => {
+                if (!res.ok) throw new Error('Failed to send OTP');
+                return res.json();
+            }),
+    
+        // Verify OTP for login
+        verifyOtp: (phoneNumber, otp) =>
+            fetch(`${BASE_URL}/admin_console/otp-verify/`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ phone_number: phoneNumber, otp }),
+            }).then((res) => {
+                if (!res.ok) throw new Error('OTP verification failed');
+                return res.json();
+            }),
+
     forgotPassword: (email) =>
         fetch(`${BASE_URL}/admin_console/forgotpassword/`, {
             method: 'POST',

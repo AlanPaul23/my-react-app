@@ -1,10 +1,12 @@
+// Navbar.js
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { api } from '../utils/api';
 import { toast } from 'react-toastify';
+import './Navbar.css';
 
 function Navbar({ isAuthenticated, setIsAuthenticated }) {
-    const [searchTerm, setSearchTerm] = useState('');
+    const [isMenuOpen, setIsMenuOpen] = useState(false);  // State to handle menu toggle
     const navigate = useNavigate();
 
     const handleLogout = async () => {
@@ -12,9 +14,9 @@ function Navbar({ isAuthenticated, setIsAuthenticated }) {
             const response = await api.logout();
             if (response.ok) {
                 setIsAuthenticated(false);
-                localStorage.removeItem('isAuthenticated'); 
+                localStorage.removeItem('isAuthenticated');
                 toast.success('Logged out successfully');
-                navigate('/login');
+                window.location.href = '/login';  // Refresh page after logout
             } else {
                 toast.error('Failed to log out');
             }
@@ -23,32 +25,29 @@ function Navbar({ isAuthenticated, setIsAuthenticated }) {
         }
     };
 
-    const handleSearch = (e) => {
-        e.preventDefault();
-        if (searchTerm) {
-            navigate(`/products?search=${searchTerm}`);
-            setSearchTerm(''); // Clear search input after search
-        }
+    const handleLinkClick = (path) => {
+        window.location.href = path;  // Forces page refresh on link click
     };
 
     return (
-        <nav style={styles.navbar}>
-            <h1 style={styles.brand}>Admin Console</h1>
+        <nav className={`navbar ${isMenuOpen ? 'active' : ''}`}>
+            <h1 className="brand">EasyShop</h1>
+            <div className="menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)}>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
 
-           
-
-            <div style={styles.links}>
+            <div className="links">
                 {isAuthenticated ? (
                     <>
-                        <Link to="/products" style={styles.link}>Products</Link>
-                        <Link to="/cart" style={styles.link}>Cart</Link>
-                        <button onClick={handleLogout} style={styles.linkButton}>Logout</button>
+                        <button onClick={() => handleLinkClick('/products')} className="linkButton">Products</button>
+                        <button onClick={() => handleLinkClick('/cart')} className="linkButton">Cart</button>
+                        <button onClick={handleLogout} className="linkButton">Logout</button>
                     </>
                 ) : (
                     <>
-                        <Link to="/login" style={styles.link}>Login</Link>
-                        <Link to="/register" style={styles.link}>Register</Link>
-                        <Link to="/forgotpassword" style={styles.link}>Forgot Password</Link>
+                        <button onClick={() => handleLinkClick('/login')} className="linkButton">Login</button>
                     </>
                 )}
             </div>
@@ -57,53 +56,3 @@ function Navbar({ isAuthenticated, setIsAuthenticated }) {
 }
 
 export default Navbar;
-
-const styles = {
-    navbar: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        padding: '1rem',
-        backgroundColor: '#333',
-        color: '#fff',
-    },
-    brand: {
-        fontSize: '1.5rem',
-        color: '#fff',
-    },
-    searchForm: {
-        display: 'flex',
-        alignItems: 'center',
-    },
-    searchInput: {
-        padding: '0.5rem',
-        marginRight: '0.5rem',
-        borderRadius: '4px',
-        border: '1px solid #ccc',
-    },
-    searchButton: {
-        padding: '0.5rem 1rem',
-        borderRadius: '4px',
-        border: 'none',
-        backgroundColor: '#4CAF50',
-        color: '#fff',
-        cursor: 'pointer',
-    },
-    links: {
-        display: 'flex',
-        alignItems: 'center',
-    },
-    link: {
-        color: '#fff',
-        textDecoration: 'none',
-        marginLeft: '1rem',
-    },
-    linkButton: {
-        color: '#fff',
-        textDecoration: 'none',
-        marginLeft: '1rem',
-        backgroundColor: 'transparent',
-        border: 'none',
-        cursor: 'pointer',
-    },
-};

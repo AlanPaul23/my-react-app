@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { api } from '../utils/api';
 import { toast } from 'react-toastify';
+import './ForgotPassword.css';
 
 function ForgotPassword() {
     const [email, setEmail] = useState('');
@@ -34,6 +35,7 @@ function ForgotPassword() {
     };
     
     return (
+        <div className='forgot-password-container'>
         <form onSubmit={handleSubmit}>
             <h2>Forgot Password</h2>
             <input
@@ -45,6 +47,7 @@ function ForgotPassword() {
             />
             <button type="submit">Send Reset Link</button>
         </form>
+        </div>
     );
 }
 

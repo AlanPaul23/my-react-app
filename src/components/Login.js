@@ -1,7 +1,9 @@
+// Login.js
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { api } from '../utils/api';
 import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
+import './Login.css';
 import ResendVerification from './ResendVerification';
 
 function Login({ setIsAuthenticated }) {
@@ -33,7 +35,8 @@ function Login({ setIsAuthenticated }) {
     };
 
     return (
-        <div>
+        <div className='login-container'>
+            <h2>Login</h2>
             <form onSubmit={handleLogin}>
                 <input
                     type="email"
@@ -49,11 +52,23 @@ function Login({ setIsAuthenticated }) {
                 />
                 <button type="submit">Login</button>
             </form>
-            <button onClick={() => setShowResendVerification(!showResendVerification)}>
+          
+            
+            {/* Navigation buttons for Register, Forgot Password, OTP Login */}
+            <div className="auth-links">
+                <button onClick={() => navigate('/register')} className="auth-link">Create Account</button>
+                <button onClick={() => navigate('/otp-login')} className="auth-link">Login with OTP</button>
+                <button onClick={() => navigate('/forgotpassword')} className="auth-link">Forgot Password?</button>
+                <button onClick={() => setShowResendVerification(!showResendVerification)}>
                 {showResendVerification ? 'Hide' : 'Resend Verification'}
             </button>
             {showResendVerification && <ResendVerification />}
+            </div>
+
+           
+            
         </div>
+        
     );
 }
 

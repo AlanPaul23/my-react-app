@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { api } from '../utils/api';
 import { toast } from 'react-toastify';
+import './ResetPassword.css';
 
 function ResetPassword() {
     const [new_password, setPassword] = useState('');
@@ -31,6 +32,7 @@ function ResetPassword() {
     };
 
     return (
+        <div className='reset-password-container'>
         <form onSubmit={handleSubmit}>
             <h2>Reset Password</h2>
             <input
@@ -49,6 +51,7 @@ function ResetPassword() {
             />
             <button type="submit">Reset Password</button>
         </form>
+        </div>
     );
 }
 

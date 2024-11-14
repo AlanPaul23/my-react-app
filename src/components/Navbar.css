@@ -1,0 +1,89 @@
+/* General Navbar Styles */
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    background-color: #333;
+    color: #fff;
+    position: relative;
+}
+
+/* Brand Styling */
+.navbar .brand {
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+/* Links container */
+.navbar .links {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+/* Button Styling */
+.navbar .linkButton {
+    color: #fff;
+    text-decoration: none;
+    margin-left: 1rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.navbar .linkButton:hover {
+    color: #007bff;
+}
+
+/* Mobile Menu Toggle */
+.navbar .menu-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.navbar .menu-toggle div {
+    width: 25px;
+    height: 3px;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+/* Media Queries for Mobile */
+@media (max-width: 768px) {
+    /* Make Navbar a column layout for mobile */
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Adjust links display */
+    .navbar .links {
+        width: 100%;
+        justify-content: center;
+        margin-top: 15px;
+        display: none; /* Hide links initially on mobile */
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    /* Show menu toggle icon */
+    .navbar .menu-toggle {
+        display: flex;
+    }
+
+    /* Show links when menu is active */
+    .navbar.active .links {
+        display: flex;
+    }
+
+    /* Adjust button sizes for mobile */
+    .navbar .linkButton {
+        font-size: 1.2rem;
+        margin-left: 0;
+    }
+}

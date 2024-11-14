@@ -11,6 +11,8 @@ import Products from './components/Products';
 import Cart from './components/Cart';
 import VerifyAccount from './components/VerifyAccount';
 import ResendVerification from './components/ResendVerification';
+import OtpLogin from './components/OtpLogin';
+import './App.css';
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(
@@ -30,8 +32,10 @@ function App() {
         <Router>
             <Navbar isAuthenticated={isAuthenticated} setIsAuthenticated={setIsAuthenticated} />
             <ToastContainer />
+            <div className='app-container'>
             <Routes>
                 <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
+                <Route path="/otp-login" element={<OtpLogin setIsAuthenticated={setIsAuthenticated} />} />
                 <Route path="/register" element={<Register />} />
                 <Route path="/forgotpassword" element={<ForgotPassword />} />
                 <Route path="/reset-password" element={<ResetPassword />} />
@@ -49,6 +53,7 @@ function App() {
                 />
                 <Route path="/" element={<Navigate to="/products" />} />
             </Routes>
+            </div>
         </Router>
     );
 }

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { api } from '../utils/api';
 import { toast } from 'react-toastify';
+import './Register.css';
 
 function Register() {
     const [firstname, setFirstname] = useState('');
@@ -44,7 +45,7 @@ function Register() {
             const response = await api.register(data);
             
             if (response.ok) {
-                toast.success('Registration successful');
+                toast.success('Email sent to activate account');
             } else {
                 const errorData = await response.json();
                 const errorMessage = errorData.Errors || errorData.Message || 'Registration failed';
@@ -56,6 +57,8 @@ function Register() {
     };
 
     return (
+        <div className='register-container'>
+             <h2>Register</h2>
         <form onSubmit={handleSubmit}>
             <input
                 type="text"
@@ -71,11 +74,18 @@ function Register() {
                 onChange={(e) => setLastname(e.target.value)}
                 required
             />
-            <input
+              <input
                 type="email"
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                required
+            />
+             <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 required
             />
             <input
@@ -84,16 +94,11 @@ function Register() {
                 value={mobilenumber}
                 onChange={(e) => setMobilenumber(e.target.value)}
                 required
-            />
-            <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                required
+                maxLength="10"
             />
             <button type="submit">Register</button>
         </form>
+        </div>
     );
 }
 

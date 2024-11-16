@@ -1,4 +1,3 @@
-// Login.js
 import React, { useState } from 'react';
 import { api } from '../utils/api';
 import { toast } from 'react-toastify';
@@ -9,6 +8,7 @@ import ResendVerification from './ResendVerification';
 function Login({ setIsAuthenticated }) {
     const [credentials, setCredentials] = useState({ email: '', password: '' });
     const [showResendVerification, setShowResendVerification] = useState(false);
+    const [loginError, setLoginError] = useState(null); // New state for tracking login errors
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
@@ -18,15 +18,16 @@ function Login({ setIsAuthenticated }) {
             const data = await response.json();
 
             if (response.ok) {
-                const { role, user_id, Message } = data;
                 setIsAuthenticated(true);
-                localStorage.setItem('role', role);
-                localStorage.setItem('user_id', user_id);
-
-                toast.success(Message || 'Login successful');
+                toast.success(data.Message || 'Login successful');
                 navigate('/products');
             } else {
                 toast.error(data.error || 'Login failed');
+                // Check if the error is related to an unactivated account
+                if (data.error && data.error.includes('Account not activated')) {
+                    setLoginError('Account not activated');
+                    setShowResendVerification(true); // Show the resend verification button
+                }
             }
         } catch (error) {
             toast.error('Error logging in');
@@ -52,23 +53,22 @@ function Login({ setIsAuthenticated }) {
                 />
                 <button type="submit">Login</button>
             </form>
-          
-            
+
             {/* Navigation buttons for Register, Forgot Password, OTP Login */}
             <div className="auth-links">
                 <button onClick={() => navigate('/register')} className="auth-link">Create Account</button>
                 <button onClick={() => navigate('/otp-login')} className="auth-link">Login with OTP</button>
                 <button onClick={() => navigate('/forgotpassword')} className="auth-link">Forgot Password?</button>
-                <button onClick={() => setShowResendVerification(!showResendVerification)}>
-                {showResendVerification ? 'Hide' : 'Resend Verification'}
-            </button>
-            {showResendVerification && <ResendVerification />}
-            </div>
 
-           
-            
+                {/* Conditionally render the "Resend Verification" button */}
+                {loginError === 'Account not activated' && (
+                    <button onClick={() => setShowResendVerification(!showResendVerification)}>
+                        {showResendVerification ? 'Hide' : 'Resend Verification'}
+                    </button>
+                )}
+                {showResendVerification && <ResendVerification />}
+            </div>
         </div>
-        
     );
 }
 

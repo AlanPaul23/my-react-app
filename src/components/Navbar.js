@@ -41,12 +41,16 @@ function Navbar({ isAuthenticated, setIsAuthenticated }) {
             <div className="links">
                 {isAuthenticated ? (
                     <>
-                        <button onClick={() => handleLinkClick('/products')} className="linkButton">Products</button>
+                      <button onClick={() => handleLinkClick('/products')} className="linkButton">Products</button>
                         <button onClick={() => handleLinkClick('/cart')} className="linkButton">Cart</button>
+                        <button onClick={() => handleLinkClick('/order-history')} className="linkButton">Order History</button>
                         <button onClick={handleLogout} className="linkButton">Logout</button>
+                       
+
                     </>
                 ) : (
                     <>
+                      <button onClick={() => handleLinkClick('/products')} className="linkButton">Products</button>
                         <button onClick={() => handleLinkClick('/login')} className="linkButton">Login</button>
                     </>
                 )}

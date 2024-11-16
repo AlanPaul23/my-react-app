@@ -12,7 +12,12 @@ import Cart from './components/Cart';
 import VerifyAccount from './components/VerifyAccount';
 import ResendVerification from './components/ResendVerification';
 import OtpLogin from './components/OtpLogin';
+import Checkout from './components/Checkout';
 import './App.css';
+import OrderHistory from './components/OrderHistory';
+import UserProfile from './components/UserProfile';
+import ReactivateAccount from './components/ReactivateAccount';
+import ReactivateVerification from './components/ReactivateVerification';
 
 function App() {
     const [isAuthenticated, setIsAuthenticated] = useState(
@@ -23,10 +28,7 @@ function App() {
         localStorage.setItem('isAuthenticated', JSON.stringify(isAuthenticated));
     }, [isAuthenticated]);
 
-    // Updated AuthRoute to use `children`
-    const AuthRoute = ({ children }) => {
-        return isAuthenticated ? children : <Navigate to="/login" replace />;
-    };
+
 
     return (
         <Router>
@@ -35,22 +37,19 @@ function App() {
             <div className='app-container'>
             <Routes>
                 <Route path="/login" element={<Login setIsAuthenticated={setIsAuthenticated} />} />
-                <Route path="/otp-login" element={<OtpLogin setIsAuthenticated={setIsAuthenticated} />} />
+                <Route path="/otp-login" element={<OtpLogin setIsAuthenticated={setIsAuthenticated} />}  />
                 <Route path="/register" element={<Register />} />
                 <Route path="/forgotpassword" element={<ForgotPassword />} />
                 <Route path="/reset-password" element={<ResetPassword />} />
                 <Route path="/products" element={<Products />} />
                 <Route path="/verify-account" element={<VerifyAccount />} />
-<Route path="/resend-verification" element={<ResendVerification />} />
-                {/* Wrap Cart in AuthRoute */}
-                <Route 
-                    path="/cart" 
-                    element={
-                        <AuthRoute>
-                            <Cart />
-                        </AuthRoute>
-                    } 
-                />
+                <Route path="/resend-verification" element={<ResendVerification />} />
+                <Route path="/cart" element={<Cart setIsAuthenticated={setIsAuthenticated} />} />
+                <Route path="/checkout" element={<Checkout setIsAuthenticated={setIsAuthenticated} />} />
+                <Route path="/order-history" element={<OrderHistory setIsAuthenticated={setIsAuthenticated} />} />
+                <Route path="/profile" element={<UserProfile setIsAuthenticated={setIsAuthenticated} />} />
+                <Route path="/reactivate-verification" element={<ReactivateVerification />} />
+                <Route path="/reactivate-account" element={<ReactivateAccount />} />
                 <Route path="/" element={<Navigate to="/products" />} />
             </Routes>
             </div>

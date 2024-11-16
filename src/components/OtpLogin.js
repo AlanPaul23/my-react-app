@@ -11,29 +11,33 @@ function OtpLogin({ setIsAuthenticated }) {
     const [isOtpSent, setIsOtpSent] = useState(false);
     const navigate = useNavigate();
 
-    // Function to handle sending OTP
     const handleSendOtp = async () => {
         try {
             const response = await api.requestOtp(phoneNumber);
+            console.log('OTP Verification Response:', response);  // Debugging line
+            if (!response || !response.message) throw new Error('Unexpected response from server');
             toast.success(response.message);
             setIsOtpSent(true); // Move to OTP verification stage
         } catch (error) {
-            toast.error(error.message);
+            toast.error(error.message || 'Failed to send OTP');
         }
     };
-
+    
     const handleVerifyOtp = async () => {
-        console.log('Verifying OTP with:', { phoneNumber, otp }); // Debugging log
+        console.log('Verifying OTP with:', { phoneNumber, otp });
         try {
             const response = await api.verifyOtp(phoneNumber, otp);
+            console.log('OTP Verification Response:', response);  // Debugging line
+            if (!response || !response.message) throw new Error('Unexpected response from server');
+            
             toast.success(response.message);
-    
             setIsAuthenticated(true);
             localStorage.setItem('isAuthenticated', true);
     
             navigate('/products');
         } catch (error) {
-            toast.error(error.message);
+            toast.error(error.message || 'OTP verification failed');
+            console.error('Error:', error);  // Additional error logging
         }
     };
     

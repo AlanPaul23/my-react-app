@@ -60,13 +60,13 @@ const Products = () => {
       <div className="product-list">
         {products.length > 0 ? (
           products.map(product => (
-            <div className="product-card" key={product.productId}>
+            <div className="product-card" key={product.productID}>
               <img src={product.imageUrl} alt={product.model} />
               <h3>{product.product}</h3>
               <p className='model'>{product.model}</p>
               <p className='desc'>{product.description}</p>
               <p className="price">Price: ₹{product.price}</p>
-              <AddToCartButton productId={product.productId} />
+              <AddToCartButton productId={product.productID} />
             </div>
           ))
         ) : (

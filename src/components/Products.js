@@ -66,7 +66,7 @@ const Products = () => {
               <p className='model'>{product.model}</p>
               <p className='desc'>{product.description}</p>
               <p className="price">Price: ₹{product.price}</p>
-              <AddToCartButton productId={product.productID} />
+              <AddToCartButton product_id={product.productID} />
             </div>
           ))
         ) : (

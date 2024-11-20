@@ -19,6 +19,11 @@
     border-radius: 5px;
 }
 
+.cart img{
+    width: 200px;
+    height: 200px;
+}
+
 .remove-button {
     background-color: red;
     color: white;

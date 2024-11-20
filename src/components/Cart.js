@@ -2,12 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { api } from '../utils/api';
 import { toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
-import './Cart.css'; // Add CSS for better styling
+import './Cart.css';
 
 function Cart({ setIsAuthenticated }) {
     const navigate = useNavigate();
     const [cart, setCart] = useState([]);
-    const [loading, setLoading] = useState(true); // Loading state
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const fetchCart = async () => {
@@ -40,16 +40,16 @@ function Cart({ setIsAuthenticated }) {
         fetchCart();
     }, [setIsAuthenticated, navigate]);
 
-    const handleDelete = async (itemId) => {
+    const handleDelete = async (cartItemId) => {
         try {
-            const response = await api.deleteCartItem(itemId);
+            const response = await api.deleteCartItem(cartItemId);
 
             if (!response.ok) {
                 toast.error('Failed to remove item');
                 return;
             }
 
-            setCart((prevItems) => prevItems.filter(item => item.id !== itemId));
+            setCart((prevItems) => prevItems.filter(item => item.id !== cartItemId));
             toast.success('Item removed from cart');
         } catch (error) {
             console.error('Error removing item:', error.message);
@@ -76,14 +76,15 @@ function Cart({ setIsAuthenticated }) {
                     <ul className="cart-list">
                         {cart.map((item) => (
                             <li key={item.id} className="cart-item">
-                                <div>
-                                    <p><strong>{item.productName}</strong></p>
+                                <div className='cart'>
+                                    <img src={item.imageUrl} alt={item.model} />
+                                    <p>{item.model}</p>
                                     <p>Quantity: {item.quantity}</p>
                                     <p>Price: ₹{item.price}</p>
                                 </div>
                                 <button
                                     className="remove-button"
-                                    onClick={() => handleDelete(item.id)}
+                                    onClick={() => handleDelete(item.id)} // Use `id` here
                                 >
                                     Remove
                                 </button>

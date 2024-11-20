@@ -129,7 +129,7 @@ export const api = {
             }),
         
         deleteCartItem: (itemId) =>
-            fetch(`${BASE_URL}/cart_mgmt/remove/${itemId}`, {
+            fetch(`${BASE_URL}/cart_mgmt/remove/${itemId}/`, {
                 method: 'DELETE',
                 credentials: 'include',
             }),
